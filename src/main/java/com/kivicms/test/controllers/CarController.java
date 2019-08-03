@@ -8,12 +8,10 @@ import com.kivicms.test.repositories.MarkRepository;
 import com.kivicms.test.repositories.VendorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.Optional;
 
 @RequestMapping("/car")
 @Controller
@@ -34,6 +32,15 @@ public class CarController {
         Iterable<Car> cars = carRepository.findAll();
         model.put("cars", cars);
 
+        String breadcrumbs[][] = new String[2][2];
+
+        breadcrumbs[0][0] = "/car";
+        breadcrumbs[0][1] = "Автомобили";
+        breadcrumbs[1][0] = "";
+        breadcrumbs[1][1] = "Список";
+
+        model.put("breadcrumbs", breadcrumbs);
+
         return "car/index";
     }
 
@@ -46,15 +53,55 @@ public class CarController {
         Iterable<Vendor> vendorList = vendorRepository.findAll();
         model.put("vendorList", vendorList);
 
+        Car car = new Car(" ");
+        model.put("car", car);
+
         return "car/create";
     }
 
     @PostMapping("/create")
     public String add(@RequestParam Vendor vendor, @RequestParam Mark mark, String number) {
         Car car = new Car(vendor, mark, number, 1);
-
         carRepository.save(car);
+        return "redirect:/car";
+    }
 
+    @GetMapping("/view/{id}")
+    public String view(@PathVariable Integer id, Map<String, Object> model) {
+        Car car = carRepository.findById(id).get();
+        model.put("car", car);
+        return "car/view";
+    }
+
+    @GetMapping("/update/{id}")
+    public String edit(@PathVariable Integer id, Map<String, Object> model) {
+        Car car = carRepository.findById(id).get();
+
+        model.put("car", car);
+
+        Iterable<Mark> marks = markRepository.findAll();
+        model.put("markList", marks);
+
+        Iterable<Vendor> vendorList = vendorRepository.findAll();
+        model.put("vendorList", vendorList);
+
+        return "car/update";
+    }
+
+    @PostMapping("/update/{id}")
+    public String update(@PathVariable Integer id, @RequestParam Vendor vendor, @RequestParam Mark mark, String number) {
+        Car car = carRepository.findById(id).get();
+        car.setId(id);
+        car.setVendor(vendor);
+        car.setMark(mark);
+        car.setNumber(number);
+        carRepository.save(car);
+        return "redirect:/car/view/" + id;
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id) {
+        carRepository.deleteById(id);
         return "redirect:/car";
     }
 }

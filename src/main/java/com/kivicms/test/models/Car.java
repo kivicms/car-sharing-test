@@ -16,6 +16,10 @@ public class Car {
     @JoinColumn(name = "mark_id")
     private Mark mark;
 
+    @ManyToOne
+    @JoinColumn(name = "renter_id")
+    private Renter renter;
+
     /**
      * Гос номер
      */
@@ -23,10 +27,15 @@ public class Car {
 
     /**
      * Статус авто
+     * 0 - свободно, 1 - в работе
      */
     private Integer status;
 
     public Car() {
+    }
+
+    public Car(String number) {
+        this.number = number;
     }
 
     public Car(Vendor vendor, Mark mark, String number, Integer status) {
@@ -44,6 +53,13 @@ public class Car {
         this.status = status;
     }
 
+    public String getStatusName(){
+        if (this.status == 0) {
+            return "Свободно";
+        }
+        return "В работе";
+    }
+
     public Integer getId() {
         return id;
     }
@@ -54,6 +70,13 @@ public class Car {
 
     public Vendor getVendor() {
         return vendor;
+    }
+
+    public Integer getVendorId() {
+        if (this.vendor != null) {
+            return this.vendor.getId();
+        }
+        return 0;
     }
 
     public String getVendorName()
@@ -74,6 +97,13 @@ public class Car {
         return this.mark.getName();
     }
 
+    public Integer getMarkId() {
+        if (this.mark != null) {
+            return this.mark.getId();
+        }
+        return 0;
+    }
+
     public void setMark(Mark mark) {
         this.mark = mark;
     }
@@ -84,6 +114,21 @@ public class Car {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public Renter getRenter() {
+        return renter;
+    }
+
+    public void setRenter(Renter renter) {
+        this.renter = renter;
+    }
+
+    public String getRenterFio() {
+        if (this.renter != null) {
+            return this.renter.getFio();
+        }
+        return "Нет";
     }
 
 }
