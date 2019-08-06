@@ -1,9 +1,6 @@
 <#macro form>
 
-    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#markForm"
-            aria-expanded="false" aria-controls="collapseExample">
-        Добавить производителя
-    </button>
+
     <div class="row collapse" id="markForm">
         <div class="col-md-12">
             <form method="post" action="/vendor/create">
@@ -17,7 +14,7 @@
 
                 <div class="form-group row">
                     <div class="col-sm-10">
-                        <button type="submit" class="btn btn-primary my-1">Добавить</button>
+                        <button type="submit" class="btn btn-primary my-1">Сохранить</button>
                     </div>
                 </div>
 

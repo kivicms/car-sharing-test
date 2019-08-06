@@ -1,9 +1,5 @@
 <#macro form>
 
-    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#markForm"
-            aria-expanded="false" aria-controls="collapseExample">
-        Добавить модель
-    </button>
     <div class="row collapse" id="markForm">
         <div class="col-md-12">
             <form method="post" action="/mark/create">

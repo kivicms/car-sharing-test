@@ -1,9 +1,13 @@
 <#import "../layouts/main.ftl" as m>
 <@m.page>
-    <h1>Добавить арендатора</h1>
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">${pageTitle}</h3>
+            <div class="box-tools pull-right">
 
-    <div class="row">
-        <div class="col-md-12">
+            </div>
+        </div>
+        <div class="box-body">
 
             <form method="post" action="/renter/create">
 
@@ -17,7 +21,8 @@
                 <div class="form-group row">
                     <label for="inputPassport" class="col-sm-2 col-form-label">Паспорт</label>
                     <div class="col-sm-10">
-                        <input type="text" name="passport" class="form-control" id="inputPassport" placeholder="Паспорт">
+                        <input type="text" name="passport" class="form-control" id="inputPassport"
+                               placeholder="Паспорт">
                     </div>
                 </div>
 

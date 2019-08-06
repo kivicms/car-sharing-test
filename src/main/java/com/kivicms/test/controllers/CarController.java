@@ -9,9 +9,7 @@ import com.kivicms.test.repositories.VendorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Map;
-import java.util.Optional;
 
 @RequestMapping("/car")
 @Controller
@@ -33,14 +31,13 @@ public class CarController {
         model.put("cars", cars);
 
         String breadcrumbs[][] = new String[2][2];
-
         breadcrumbs[0][0] = "/car";
         breadcrumbs[0][1] = "Автомобили";
         breadcrumbs[1][0] = "";
         breadcrumbs[1][1] = "Список";
-
         model.put("breadcrumbs", breadcrumbs);
 
+        model.put("pageTitle", "Автомобили");
         return "car/index";
     }
 
@@ -56,12 +53,19 @@ public class CarController {
         Car car = new Car(" ");
         model.put("car", car);
 
+        String breadcrumbs[][] = new String[2][2];
+        breadcrumbs[0][0] = "/car";
+        breadcrumbs[0][1] = "Автомобили";
+        breadcrumbs[1][0] = "";
+        breadcrumbs[1][1] = "Добавить";
+        model.put("breadcrumbs", breadcrumbs);
+        model.put("pageTitle", "Добавить автомобиль");
         return "car/create";
     }
 
     @PostMapping("/create")
     public String add(@RequestParam Vendor vendor, @RequestParam Mark mark, String number) {
-        Car car = new Car(vendor, mark, number, 1);
+        Car car = new Car(vendor, mark, number, 0);
         carRepository.save(car);
         return "redirect:/car";
     }
@@ -70,6 +74,14 @@ public class CarController {
     public String view(@PathVariable Integer id, Map<String, Object> model) {
         Car car = carRepository.findById(id).get();
         model.put("car", car);
+
+        String breadcrumbs[][] = new String[2][2];
+        breadcrumbs[0][0] = "/car";
+        breadcrumbs[0][1] = "Автомобили";
+        breadcrumbs[1][0] = "";
+        breadcrumbs[1][1] = "Просмотр: " + car.getNumber();
+        model.put("breadcrumbs", breadcrumbs);
+        model.put("pageTitle", "Просмотр автомобиля:" + car.getNumber());
         return "car/view";
     }
 
@@ -85,6 +97,13 @@ public class CarController {
         Iterable<Vendor> vendorList = vendorRepository.findAll();
         model.put("vendorList", vendorList);
 
+        String breadcrumbs[][] = new String[2][2];
+        breadcrumbs[0][0] = "/car";
+        breadcrumbs[0][1] = "Автомобили";
+        breadcrumbs[1][0] = "";
+        breadcrumbs[1][1] = "Редактирование " + car.getNumber();
+        model.put("breadcrumbs", breadcrumbs);
+        model.put("pageTitle", "Редактирование автомобиля:" + car.getNumber());
         return "car/update";
     }
 

@@ -131,4 +131,7 @@ public class Car {
         return "Нет";
     }
 
+    public String getFullCarName() {
+        return this.vendor.getName() + " / " + this.mark.getName() + " / " + this.number;
+    }
 }

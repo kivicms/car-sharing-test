@@ -19,6 +19,15 @@ public class VendorController {
 
         Iterable<Vendor> vendors = vendorRepository.findAll();
         model.put("vendors", vendors);
+
+        String breadcrumbs[][] = new String[2][2];
+        breadcrumbs[0][0] = "/vendor";
+        breadcrumbs[0][1] = "Производители";
+        breadcrumbs[1][0] = "";
+        breadcrumbs[1][1] = "Список";
+        model.put("breadcrumbs", breadcrumbs);
+
+        model.put("pageTitle", "Производители");
         return "vendor/index";
     }
 

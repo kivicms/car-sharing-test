@@ -4,10 +4,7 @@ import com.kivicms.test.models.Renter;
 import com.kivicms.test.repositories.RenterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -22,11 +19,28 @@ public class RenterController {
     public String index(Map<String, Object> model) {
         Iterable<Renter> renters = renterRepository.findAll();
         model.put("renters", renters);
+        String breadcrumbs[][] = new String[2][2];
+        breadcrumbs[0][0] = "/renter";
+        breadcrumbs[0][1] = "Арендаторы";
+        breadcrumbs[1][0] = "";
+        breadcrumbs[1][1] = "Список";
+        model.put("breadcrumbs", breadcrumbs);
+
+        model.put("pageTitle", "Арендаторы");
         return "renter/index";
     }
 
     @GetMapping("/create")
-    public String create() {
+    public String create(Map<String, Object> model) {
+
+        String breadcrumbs[][] = new String[2][2];
+        breadcrumbs[0][0] = "/renter";
+        breadcrumbs[0][1] = "Арендаторы";
+        breadcrumbs[1][0] = "";
+        breadcrumbs[1][1] = "Добавить";
+        model.put("breadcrumbs", breadcrumbs);
+
+        model.put("pageTitle", "Арендаторы");
         return "renter/create";
     }
 
@@ -39,6 +53,12 @@ public class RenterController {
     ) {
         Renter renter = new Renter(fio, passport, address, phone);
         renterRepository.save(renter);
+        return "redirect:/renter";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id) {
+        renterRepository.deleteById(id);
         return "redirect:/renter";
     }
 }
