@@ -1,0 +1,24 @@
+  version 2
+  services:
+    cs-app:
+      image: app
+      depends_on:
+        - cs-mysql
+      ports:
+        - 8080:8080
+      restart: always
+
+    cs-mysql:
+      image: 'percona:5.5'
+      command: --max_allowed_packet=16777216
+      network_mode: "bridge"
+      container_name: car-sharing-mysql
+      environment:
+        SERVICE_NAME: car-sharing-mysql
+        MYSQL_DATABASE: car_sharing
+        MYSQL_USER: root
+        MYSQL_PASSWORD:
+        MYSQL_ROOT_PASSWORD:
+      mem_limit: 256m
+      cpus: 1
+
