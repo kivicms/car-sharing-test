@@ -1,11 +1,13 @@
 package com.kivicms.test.controllers;
 
+import com.kivicms.test.models.Breadcrumb;
 import com.kivicms.test.models.Renter;
 import com.kivicms.test.repositories.RenterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 @RequestMapping("/renter")
@@ -19,11 +21,10 @@ public class RenterController {
     public String index(Map<String, Object> model) {
         Iterable<Renter> renters = renterRepository.findAll();
         model.put("renters", renters);
-        String breadcrumbs[][] = new String[2][2];
-        breadcrumbs[0][0] = "/renter";
-        breadcrumbs[0][1] = "Арендаторы";
-        breadcrumbs[1][0] = "";
-        breadcrumbs[1][1] = "Список";
+
+        ArrayList<Breadcrumb> breadcrumbs = new ArrayList();
+        breadcrumbs.add(new Breadcrumb("/renter", "Арендаторы"));
+        breadcrumbs.add(new Breadcrumb("", "Список"));
         model.put("breadcrumbs", breadcrumbs);
 
         model.put("pageTitle", "Арендаторы");
@@ -33,11 +34,9 @@ public class RenterController {
     @GetMapping("/create")
     public String create(Map<String, Object> model) {
 
-        String breadcrumbs[][] = new String[2][2];
-        breadcrumbs[0][0] = "/renter";
-        breadcrumbs[0][1] = "Арендаторы";
-        breadcrumbs[1][0] = "";
-        breadcrumbs[1][1] = "Добавить";
+        ArrayList<Breadcrumb> breadcrumbs = new ArrayList();
+        breadcrumbs.add(new Breadcrumb("/renter", "Арендаторы"));
+        breadcrumbs.add(new Breadcrumb("", "Добавить"));
         model.put("breadcrumbs", breadcrumbs);
 
         model.put("pageTitle", "Арендаторы");

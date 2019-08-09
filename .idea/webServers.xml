@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="3de4c92e-5045-47c6-b3c4-14e089f7ecfd" name="10.147.56.141" url="http://10.147.56.141">
+        <fileTransfer host="10.147.56.141" port="22" rootFolder="/home/v.ivanov/car-sharing" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

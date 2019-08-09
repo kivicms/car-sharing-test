@@ -7,7 +7,7 @@
                 <div class="form-group row">
                     <label for="inputVendorId" class="col-sm-2 col-form-label">Производитель</label>
                     <div class="col-sm-10">
-                        <select name="vendor" class="form-control">
+                        <select name="vendorId" class="form-control">
                             <#list vendorList as vendor>
                                 <option value="${vendor.id}">${vendor.name}</option>
                             </#list>

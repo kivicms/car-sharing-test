@@ -11,7 +11,7 @@
             <form method="post">
                 <div class="form-group">
                     <label>Автомобиль</label>
-                    <select name="car" id="carselector" class="form-control">
+                    <select name="carId" id="carselector" class="form-control">
                         <#list cars as car>
                             <option value="${car.id}">${car.number} / ${car.vendor.name} / ${car.mark.name}</option>
                         </#list>
