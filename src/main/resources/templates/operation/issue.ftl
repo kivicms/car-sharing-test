@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-group">
                     <label>Арендатор</label>
-                    <select name="renter" id="renterselector" class="form-control">
+                    <select name="renterId" id="renterselector" class="form-control">
                         <#list renters as renter>
                             <option value="${renter.id}">${renter.fio}</option>
                         </#list>

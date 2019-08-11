@@ -5,7 +5,7 @@
 
 	<fileSets>
 		<fileSet>
-			<directory>${project.basedir}/src/main/docker</directory>
+			<directory>${project.basedir}/docker</directory>
 			<outputDirectory>./</outputDirectory>
 			<fileMode>777</fileMode>
 			<includes>

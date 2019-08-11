@@ -47,7 +47,8 @@ public class OperationController {
     }
 
     @PostMapping("/issue")
-    public String issueAdd(@RequestParam Integer carId, @RequestParam Renter renter) {
+    public String issueAdd(@RequestParam Integer carId, @RequestParam Integer renterId) {
+        Renter renter = renterRepository.findById(renterId).get();
         Car car = carRepository.findById(carId).get();
         Operation operation = new Operation(car, renter);
         operationRepository.save(operation);

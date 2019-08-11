@@ -78,11 +78,11 @@
                         <image>
                             <name>app</name>
                             <build>
-                                <dockerFileDir>${project.basedir}/src/main/docker</dockerFileDir>
+                                <dockerFileDir>${project.basedir}/docker</dockerFileDir>
                                 <assembly>
                                     <mode>dir</mode>
                                     <targetDir>/app</targetDir>
-                                    <descriptor>${project.basedir}/src/main/docker/assembly.xml</descriptor>
+                                    <descriptor>${project.basedir}/docker/assembly.xml</descriptor>
                                 </assembly>
                             </build>
                         </image>

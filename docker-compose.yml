@@ -1,0 +1,36 @@
+version: "3.7"
+services:
+  app:
+    image: app
+    depends_on:
+      - mysql
+    ports:
+      - 8090-8092:8080
+    restart: always
+
+  mysql:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    container_name: mysql
+    volumes:
+      - /var/lib/mysql
+      - ./docker/mysql/config.cnf:/etc/mysql/conf.d/config.cnf
+    ports:
+      - 3306:3306
+    restart: always
+    environment:
+      MYSQL_DATABASE: car_sharing
+      MYSQL_USER: carsharing
+      MYSQL_PASSWORD: Zc4e72xs
+      MYSQL_ROOT_PASSWORD: Zc4e72xs
+
+  nginx:
+    image: nginx:1.17.2-alpine
+    container_name: nginx
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.cnf
+    links:
+      - app
+    ports:
+      - 80:80
+
