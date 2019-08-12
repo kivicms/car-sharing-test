@@ -56,4 +56,12 @@ public class NavbarItem {
     public void setItems(ArrayList<NavbarItem> items) {
         this.items = items;
     }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
 }
